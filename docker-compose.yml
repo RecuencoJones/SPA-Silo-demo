@@ -1,0 +1,25 @@
+version: '2'
+services:
+  silo:
+    build: ./silo
+    ports: 
+    - 8080:80
+    networks:
+    - net
+  spa-a:
+    build: ./spa-a
+    ports: 
+    - 8082:80
+    networks:
+    - net
+    hostname: spa-a
+  spa-b:
+    build: ./spa-b
+    ports: 
+    - 8083:80
+    networks:
+    - net
+    hostname: spa-b
+networks:
+  net:
+    external: true

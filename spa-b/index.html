@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>SPA B</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-router/3.0.2/vue-router.js"></script>
+    <base href="/foo/" />
+  </head>
+  <body>
+    <div id="root">
+      <h1>{{ message }}</h1>
+      <a href="/">Go to portal</a>
+      <a href="/bar/">Go to A</a>
+      <router-link to="/">Home</router-link>
+      <router-link to="/whatever">Whatever</router-link>
+
+      <router-view />
+    </div>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        Vue.use(VueRouter);
+
+        const Home = Vue.component('Home', {
+          template: `<h1>Home</h1>`
+        });
+
+        const Whatever = Vue.component('Whatever', {
+          template: `<h1>Whatever</h1>`
+        });
+
+        const router = new VueRouter({
+          mode: 'history',
+          routes: [
+            { path: '/', name: 'home', component: Home },
+            { path: '/whatever', name: 'whatever', component: Whatever }
+          ]
+        });
+
+        new Vue({
+          el: '#root',
+          data: {
+            message: 'This is B in Vue!'
+          },
+          router
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>SPA A</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.5/angular.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.5/angular-route.js"></script>
+    <base href="/bar/" />
+  </head>
+  <body>
+    <h1>Tis is A in AngularJS!</h1>
+    <a href="/">Go to portal</a>
+    <a href="/foo/">Go to B</a>
+    <a href="./">Home</a>
+    <a href="./whatever">Whatever</a>
+
+    <div data-ng-view></div>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        angular.module('App', [ 'ngRoute' ]);
+
+        angular.module('App').config(function($routeProvider, $locationProvider) {
+          $routeProvider
+
+            .when('/', {
+              template: '<h1>Home</h1>'
+            })
+
+            .when('/whatever', {
+              template: '<h1>Whatever</h1>'
+            });
+
+          $locationProvider.html5Mode(true);
+        });
+
+        angular.bootstrap(document.body, ['App']);
+      });
+    </script>
+  </body>
+</html>
